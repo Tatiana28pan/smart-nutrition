@@ -457,16 +457,50 @@
     </footer>
 
     <script>
-        function toggleModule(header) {
-            const module = header.parentElement;
-            module.classList.toggle('active');
-        }
+    function toggleModule(header) {
+        const module = header.parentElement;
+        module.classList.toggle('active');
+    }
 
-        function handleSubmit(event) {
-            event.preventDefault();
-            alert('Дякуємо за реєстрацію! Ми зв’яжемося з вами найближчим часом у Telegram/WhatsApp.');
+    const FORMSPREE_URL = "https://formspree.io/f/mqeryrgl"; 
+
+    async function handleSubmit(event) {
+        event.preventDefault();
+        
+        const btn = event.target.querySelector('button[type="submit"]');
+        btn.innerText = 'Надсилаємо...';
+        btn.disabled = true;
+
+        const name = document.getElementById('name') ? document.getElementById('name').value : '';
+        const email = document.getElementById('email') ? document.getElementById('email').value : '';
+        const phone = document.getElementById('phone') ? document.getElementById('phone').value : '';
+
+        try {
+            const response = await fetch(FORMSPREE_URL, {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({ name, email, phone })
+            });
+
+            if (response.ok) {
+                alert('Дякуємо за реєстрацію! Заявку успішно прийнято, ми зв’яжемося з вами найближчим часом.');
+                event.target.reset();
+            } else {
+                alert('Виникла помилка при відправці. Перевірте, будь ласка, дані та спробуйте ще раз.');
+            }
+
+        } catch (error) {
+            alert('Помилка з’єднання. Спробуйте ще раз пізніше.');
+            console.error(error);
+        } finally {
+            btn.innerText = 'Зареєструватися';
+            btn.disabled = false;
         }
-    </script>
+    }
+</script>
 </body>
 </html>
 
