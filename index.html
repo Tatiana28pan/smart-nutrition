@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Курс «Smart-харчування для всієї родини»</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2e7d32;
+            --primary-light: #4caf50;
+            --accent: #ff6f00;
+            --accent-bright: #ff9800;
+            --bg-light: #f4f9f4;
+            --text-dark: #1b2e1c;
+            --text-muted: #4a5d4b;
+            --white: #ffffff;
+            --shadow: 0 12px 35px rgba(46, 125, 50, 0.12);
+            --radius: 20px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* HERO SECTION */
+        header {
+            background: linear-gradient(135deg, #e8f5e9 0%, #a5d6a7 100%);
+            padding: 70px 0 60px;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.25);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #0d280f;
+            margin-bottom: 20px;
+            line-height: 1.25;
+        }
+
+        .hero-p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            text-align: center;
+        }
+
+        .hero-img {
+            width: 100%;
+            max-width: 420px;
+            border-radius: 50%;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.18);
+            border: 8px solid var(--white);
+            object-fit: cover;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff9800 0%, #ff6f00 100%);
+            color: var(--white);
+            padding: 18px 40px;
+            border-radius: 35px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(255, 111, 0, 0.4);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(255, 111, 0, 0.55);
+        }
+
+        /* FEATURES */
+        .features {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.3rem;
+            font-weight: 800;
+            margin-bottom: 50px;
+            color: #112d13;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 35px 25px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.3s ease;
+            border-top: 5px solid var(--primary-light);
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+        }
+
+        .card-icon {
+            font-size: 3.2rem;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            font-size: 1.35rem;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* PROGRAMME */
+        .program {
+            background-color: var(--white);
+            padding: 80px 0;
+            border-radius: 40px;
+            box-shadow: var(--shadow);
+        }
+
+        .accordion {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .module {
+            border: 2px solid #e2ece3;
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+            overflow: hidden;
+            background: var(--bg-light);
+        }
+
+        .module-header {
+            padding: 22px 28px;
+            font-weight: 700;
+            font-size: 1.15rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--white);
+            transition: background 0.3s;
+        }
+
+        .module-header:hover {
+            background-color: #f0f7f1;
+        }
+
+        .module-tag {
+            font-size: 0.8rem;
+            padding: 4px 12px;
+            border-radius: 20px;
+            color: white;
+            font-weight: 600;
+            margin-right: 15px;
+        }
+
+        .m-tag-1 { background-color: #4caf50; }
+        .m-tag-2 { background-color: #ff9800; }
+        .m-tag-3 { background-color: #2196f3; }
+        .m-tag-4 { background-color: #9c27b0; }
+
+        .module-body {
+            padding: 22px 28px;
+            display: none;
+            border-top: 1px solid #e2ece3;
+            background-color: #fbfdfb;
+        }
+
+        .module.active .module-body {
+            display: block;
+        }
+
+        .module-body ul {
+            list-style: none;
+        }
+
+        .module-body li {
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 12px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .module-body li::before {
+            content: "🥑";
+            position: absolute;
+            left: 0;
+        }
+
+        /* FORM SECTION */
+        .cta-section {
+            padding: 90px 0;
+            text-align: center;
+        }
+
+        .form-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f1f8f2 100%);
+            max-width: 580px;
+            margin: 0 auto;
+            padding: 45px 35px;
+            border-radius: 30px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+            border: 3px solid var(--primary-light);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid #c8e6c9;
+            border-radius: 12px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        @media (max-width: 850px) {
+            .hero-grid { grid-template-columns: 1fr; text-align: center; }
+            h1 { font-size: 2.2rem; }
+            .hero-img { max-width: 300px; margin-top: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO SECTION -->
+    <header>
+        <div class="container">
+            <div class="hero-grid">
+                <div>
+                    <span class="badge">Онлайн-курс для батьків</span>
+                    <h1>Smart-харчування для всієї родини</h1>
+                    <p class="hero-p">Навчися годувати сім'ю корисно, смачно та різноманітно без «кулінарного рабства», складних підрахунків і дитячих капризів.</p>
+                    <a href="#register" class="btn">Приєднатися до курсу</a>
+                </div>
+                <div class="hero-image-wrapper">
+                    <!-- Барвисте фото збалансованої тарілки -->
+                    <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=800&q=80" alt="Тарілка здорового харчування" class="hero-img">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- FEATURES -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Що ви отримаєте на курсі?</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-icon">🥗</div>
+                    <h3>Баланс без калорій</h3>
+                    <p>Опануєте простий метод «Здорової тарілки» для формування збалансованого меню за 2 хвилини.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">⏱️</div>
+                    <h3>Економія часу</h3>
+                    <p>Навчитеся готувати одну базову страву для всіх членів родини та опануєте секрети швидких заготовок.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">👶</div>
+                    <h3>Харчування без сліз</h3>
+                    <p>Дізнаєтеся, як м'яко подружити дітей з овочами та навчитеся збирати ідеальні шкільні ланчбокси.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROGRAMME -->
+    <section class="program">
+        <div class="container">
+            <h2 class="section-title">Програма курсу</h2>
+            <div class="accordion">
+                
+                <div class="module active">
+                    <div class="module-header" onclick="toggleModule(this)">
+                        <div>
+                            <span class="module-tag m-tag-1">Модуль 1</span>
+                            <span>Основи Smart-раціону</span>
+                        </div>
+                        <span>▼</span>
+                    </div>
+                    <div class="module-body">
+                        <ul>
+                            <li>Конструктор «Здорової тарілки» для дорослих та дітей.</li>
+                            <li>Принцип універсальності: одна базова страва на всіх.</li>
+                            <li>Питний режим: м'який перехід від соків до води.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header" onclick="toggleModule(this)">
+                        <div>
+                            <span class="module-tag m-tag-2">Модуль 2</span>
+                            <span>Закупки та етикетки</span>
+                        </div>
+                        <span>▼</span>
+                    </div>
+                    <div class="module-body">
+                        <ul>
+                            <li>«Розумний» супермаркет: як не купуватися на маркетинг.</li>
+                            <li>Приховані цукри та домішки за 10 секунд.</li>
+                            <li>Базовий кошик продуктів-виручалочок.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header" onclick="toggleModule(this)">
+                        <div>
+                            <span class="module-tag m-tag-3">Модуль 3</span>
+                            <span>Тайм-менеджмент (Meal Prep)</span>
+                        </div>
+                        <span>▼</span>
+                    </div>
+                    <div class="module-body">
+                        <ul>
+                            <li>Заготовки на тиждень за 2 години у вихідні.</li>
+                            <li>Правильне заморожування без втрати користі.</li>
+                            <li>Конструктори швидких вечерь за 20 хвилин.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header" onclick="toggleModule(this)">
+                        <div>
+                            <span class="module-tag m-tag-4">Модуль 4</span>
+                            <span>Дитяче харчування без стресу</span>
+                        </div>
+                        <span>▼</span>
+                    </div>
+                    <div class="module-body">
+                        <ul>
+                            <li>Чому діти відмовляються від їжі та як це виправити.</li>
+                            <li>Як зацікавити дитину овочами у формі гри.</li>
+                            <li>Ідеї та формули корисних шкільних ланчбоксів.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- REGISTRATION FORM -->
+    <section class="cta-section" id="register">
+        <div class="container">
+            <div class="form-card">
+                <h2 style="margin-bottom: 12px; color: var(--primary);">Забронювати місце</h2>
+                <p style="color: var(--text-muted); margin-bottom: 25px;">Заповніть форму, щоб отримати доступ до курсу та бонусні чек-листи.</p>
+                <form onsubmit="handleSubmit(event)">
+                    <div class="form-group">
+                        <label for="name">Ваше ім'я</label>
+                        <input type="text" id="name" placeholder="Олена" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Ваш Email</label>
+                        <input type="email" id="email" placeholder="example@gmail.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Номер телефону (WhatsApp/Telegram)</label>
+                        <input type="tel" id="phone" placeholder="+380..." required>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Зареєструватися</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 Smart-харчування для всієї родини. Всі права захищено.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleModule(header) {
+            const module = header.parentElement;
+            module.classList.toggle('active');
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            alert('Дякуємо за реєстрацію! Ми зв’яжемося з вами найближчим часом у Telegram/WhatsApp.');
+        }
+    </script>
+</body>
+</html>
+
