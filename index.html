@@ -456,7 +456,7 @@
         </div>
     </footer>
 
-   <script>
+   [26.07.2026 18:03] Доня Таня Нов: <script>
     function toggleModule(header) {
         const module = header.parentElement;
         module.classList.toggle('active');
@@ -518,6 +518,66 @@
         } finally {
             btn.innerText = 'Зареєструватися';
             btn.disabled = false;
+        }
+    }
+</script>
+[26.07.2026 18:12] Доня Таня Нов: <script>
+    function toggleModule(header) {
+        const module = header.parentElement;
+        module.classList.toggle('active');
+    }
+
+    // ⚙️ НАЛАШТУВАННЯ TELEGRAM ТА FORMSPREE
+    const FORMSPREE_URL = "https://formspree.io/f/mqeryrgl";
+    const TELEGRAM_BOT_TOKEN = "887451887:AAFk-8MXFJe0KNvXADH2LmXXjvlV23li3I"; 
+    const TELEGRAM_CHAT_ID = "1275971446";
+    const REDIRECT_TELEGRAM_URL = "https://t.me/smart28_nutrition01_course_bot"; // Куди потрапляє користувач
+
+    async function handleSubmit(event) {
+        event.preventDefault();
+        
+        const btn = event.target.querySelector('button[type="submit"]');
+        btn.innerText = 'Зачекайте...';
+        btn.disabled = true;
+
+        const name = document.getElementById('name') ? document.getElementById('name').value : '';
+        const email = document.getElementById('email') ? document.getElementById('email').value : '';
+        const phone = document.getElementById('phone') ? document.getElementById('phone').value : '';
+
+        const textMessage = 🎯 *Нова реєстрація на Smart-харчування!*\n\n👤 *Ім'я:* ${name}\n📧 *Email:* ${email}\n📱 *Телефон:* ${phone};
+
+        try {
+            // 1. Відправка на Email (Formspree)
+            const emailPromise = fetch(FORMSPREE_URL, {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({ name, email, phone })
+            });
+
+            // 2. Відправка сповіщення вам у Telegram
+            const telegramPromise = fetch(https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: TELEGRAM_CHAT_ID,
+                    text: textMessage,
+                    parse_mode: 'Markdown'
+                })
+            });
+
+            // Чекаємо завершення відправки
+            await Promise.allSettled([emailPromise, telegramPromise]);
+
+            // 3. Автоматично відкриваємо Telegram для користувача
+            window.location.href = REDIRECT_TELEGRAM_URL;
+
+        } catch (error) {
+            console.error(error);
+            // На випадок збою мережі все одно перенаправляємо людини у Telegram
+            window.location.href = REDIRECT_TELEGRAM_URL;
         }
     }
 </script>
