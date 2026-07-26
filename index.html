@@ -464,35 +464,31 @@
 
     // ⚙️ НАЛАШТУВАННЯ TELEGRAM ТА FORMSPREE
     const FORMSPREE_URL = "https://formspree.io/f/mqeryrgl";
-    const TELEGRAM_BOT_TOKEN = "887451887:AAFk-8MXFJe0KNvXADH2LmXXjvlV23li3I"; 
+    const TELEGRAM_BOT_TOKEN = "8874571887:AAGDwoutXwAfgXuRyFwu5wy6xzkffYZD5WA"; 
     const TELEGRAM_CHAT_ID = "1275971446";
+    const REDIRECT_TELEGRAM_URL = "https://t.me/smart28_nutrition01_course_bot";
 
     async function handleSubmit(event) {
         event.preventDefault();
         
         const btn = event.target.querySelector('button[type="submit"]');
-        btn.innerText = 'Надсилаємо...';
+        btn.innerText = 'Зачекайте...';
         btn.disabled = true;
 
         const name = document.getElementById('name') ? document.getElementById('name').value : '';
         const email = document.getElementById('email') ? document.getElementById('email').value : '';
         const phone = document.getElementById('phone') ? document.getElementById('phone').value : '';
 
-        const textMessage = 🎯 *Нова реєстрація на Smart-харчування!*\n\n👤 *Ім'я:* ${name}\n📧 *Email:* ${email}\n📱 *Телефон:* ${phone};
+        // Екрануємо спеціальні символи для Telegram Markdown
+        const cleanName = name.replace(/[_*\[\]]/g, '');
+        const cleanEmail = email.replace(/[_*\[\]]/g, '');
+        const cleanPhone = phone.replace(/[_*\[\]]/g, '');
+
+        const textMessage = 🎯 *Нова реєстрація на Smart-харчування!*\n\n👤 *Ім'я:* ${cleanName}\n📧 *Email:* ${cleanEmail}\n📱 *Телефон:* ${cleanPhone};
 
         try {
-            // 1. Відправка на Email (через Formspree)
-            const emailPromise = fetch(FORMSPREE_URL, {
-                method: 'POST',
-                headers: { 
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify({ name, email, phone })
-            });
-
-            // 2. Відправка у Telegram
-            const telegramPromise = fetch(https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage, {
+            // 1. Відправка у Telegram
+            const telegramPromise = fetch(https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -502,11 +498,27 @@
                 })
             });
 
-            // Чекаємо виконання обох запитів
-            const [emailResponse, telegramResponse] = await Promise.all([emailPromise, telegramPromise]);
+            // 2. Відправка на Email (Formspree)
+            const emailPromise = fetch(FORMSPREE_URL, {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({ name, email, phone })
+            });
 
-            if (emailResponse.ok || telegramResponse.ok) {
-                alert('Дякуємо за реєстрацію! Ми зв’яжемося з вами найближчим часом.');
+            // Чекаємо відправки
+            await Promise.allSettled([telegramPromise, emailPromise]);
+
+        } catch (error) {
+            console.error('Помилка відправки:', error);
+        } finally {
+            // Відкриваємо бот для клієнта
+            window.location.href = REDIRECT_TELEGRAM_URL;
+        }
+    }
+</script>
                 event.target.reset();
             } else {
                 alert('Виникла помилка при відправці. Перевірте дані та спробуйте ще раз.');
