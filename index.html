@@ -3,161 +3,426 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Курс «Smart-харчування для всієї родини»</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Smart-харчування для всієї родини</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #064e3b;
+            --primary-light: #047857;
+            --accent: #d97706;
+            --accent-hover: #b45309;
+            --bg-light: #f0fdf4;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --card-shadow: 0 20px 40px -15px rgba(6, 78, 59, 0.07);
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
         }
 
         body {
             background-color: #f8fafc;
-            color: #334155;
+            color: var(--text-main);
             line-height: 1.6;
         }
 
+        /* --- HERO SECTION --- */
         header {
-            background: linear-gradient(135deg, #2dd4bf 0%, #0d9488 100%);
+            background: linear-gradient(135deg, #064e3b 0%, #0f5132 50%, #047857 100%);
             color: white;
-            padding: 60px 20px;
+            padding: 100px 20px 80px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            font-weight: 700;
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
         }
 
         header p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto 25px;
+            font-size: 1.25rem;
+            max-width: 680px;
+            margin: 0 auto 35px;
             opacity: 0.9;
+            font-weight: 400;
         }
 
         .cta-btn {
-            display: inline-block;
-            background-color: #f59e0b;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
             color: white;
-            padding: 15px 35px;
-            border-radius: 30px;
+            padding: 18px 42px;
+            border-radius: 50px;
             text-decoration: none;
             font-weight: 700;
-            font-size: 1.1rem;
-            transition: transform 0.2s, background-color 0.2s;
+            font-size: 1.15rem;
+            box-shadow: 0 10px 25px rgba(217, 119, 6, 0.4);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border: none;
             cursor: pointer;
         }
 
         .cta-btn:hover {
-            background-color: #d97706;
-            transform: translateY(-2px);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(217, 119, 6, 0.5);
         }
 
         .container {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 0 20px;
+            max-width: 1050px;
+            margin: 0 auto;
+            padding: 60px 20px;
         }
 
         .section-title {
             text-align: center;
-            font-size: 1.8rem;
-            color: #0f766e;
-            margin-bottom: 30px;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 15px;
+            letter-spacing: -0.5px;
         }
 
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 1.1rem;
             margin-bottom: 50px;
         }
 
-        .feature-card {
+        /* --- ТАРІЛКА ЗДОРОВ'Я --- */
+        .plate-section {
             background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            text-align: center;
+            border-radius: 28px;
+            padding: 40px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 70px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            border: 1px solid rgba(6, 78, 59, 0.05);
         }
 
-        .feature-card h3 {
+        @media (max-width: 768px) {
+            .plate-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .plate-visual {
+            position: relative;
+            width: 100%;
+            max-width: 380px;
+            aspect-ratio: 1;
+            margin: 0 auto;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 12px solid #e2e8f0;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.05), 0 15px 35px rgba(0,0,0,0.1);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 6px;
+            padding: 10px;
+            overflow: hidden;
+        }
+
+        .plate-part {
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .plate-part:hover {
+            transform: scale(1.03);
+        }
+
+        .part-veggies {
+            grid-row: span 2;
+            background: #dcfce7;
+            color: #14532d;
+            border-radius: 160px 20px 20px 160px;
+        }
+
+        .part-protein {
+            background: #fef3c7;
+            color: #78350f;
+            border-radius: 20px 160px 20px 20px;
+        }
+
+        .part-carbs {
+            background: #e0f2fe;
+            color: #0c4a6e;
+            border-radius: 20px 20px 160px 20px;
+        }
+
+        .plate-part span {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+
+        .plate-part h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .plate-part p {
+            font-size: 0.75rem;
+            opacity: 0.8;
+        }
+
+        .plate-info h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        .plate-info p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+
+        .plate-list {
+            list-style: none;
+        }
+
+        .plate-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .plate-list li::before {
+            content: "✓";
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background: #dcfce7;
+            color: #15803d;
+            border-radius: 50%;
+            font-size: 0.85rem;
+        }
+
+        /* --- ГАЛЕРЕЯ СТРАВ --- */
+        .dishes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 70px;
+        }
+
+        .dish-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .dish-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(6, 78, 59, 0.15);
+        }
+
+        .dish-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .dish-content {
+            padding: 22px;
+        }
+
+        .dish-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--primary-light);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .dish-title {
+            font-size: 1.2rem;
+            font-weight: 700;
             margin-bottom: 10px;
-            color: #111827;
+            color: var(--text-main);
+        }
+
+        .dish-desc {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
+
+        /* --- ІНТЕРАКТИВНІ РУХОМІ МОДУЛІ --- */
+        .program-container {
+            max-width: 800px;
+            margin: 0 auto 70px;
         }
 
         .program-module {
             background: white;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-radius: 18px;
+            margin-bottom: 16px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(6, 78, 59, 0.06);
             overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .program-module:hover {
+            border-color: var(--primary-light);
         }
 
         .module-header {
-            padding: 20px;
-            background-color: #ffffff;
+            padding: 24px 28px;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-weight: 600;
-            font-size: 1.1rem;
+            font-weight: 700;
+            font-size: 1.15rem;
+            color: var(--primary);
+            user-select: none;
+            transition: background 0.2s ease;
+        }
+
+        .module-header:hover {
+            background: #f0fdf4;
+        }
+
+        .icon-arrow {
+            width: 32px;
+            height: 32px;
+            background: #e2e8f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s;
+            color: var(--text-main);
+        }
+
+        .program-module.active .icon-arrow {
+            transform: rotate(180deg);
+            background: var(--primary-light);
+            color: white;
         }
 
         .module-content {
-            padding: 0 20px;
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease-out, padding 0.3s ease;
-            background-color: #f8fafc;
+            transition: max-height 0.4s cubic-bezier(0, 1, 0, 1), padding 0.3s ease;
+            background-color: #fafafa;
+            padding: 0 28px;
+            color: var(--text-muted);
+            font-size: 1.02rem;
         }
 
         .program-module.active .module-content {
-            padding: 20px;
-            max-height: 500px;
+            max-height: 300px;
+            padding: 0 28px 24px;
+            transition: max-height 0.4s cubic-bezier(0.5, 0, 0.1, 1), padding 0.3s ease;
         }
 
+        /* --- ФОРМА РЕЄСТРАЦІЇ --- */
         .cta-section {
-            background-color: #ffffff;
-            padding: 40px 20px;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+            padding: 50px 30px;
+            border-radius: 28px;
+            box-shadow: 0 25px 50px -12px rgba(6, 78, 59, 0.12);
             text-align: center;
-            margin-top: 50px;
+            border: 2px solid #dcfce7;
+            max-width: 550px;
+            margin: 0 auto;
         }
 
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             text-align: left;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 5px;
-            font-weight: 600;
-            font-size: 0.9rem;
+            margin-bottom: 8px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--primary);
         }
 
         .form-group input {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
+            padding: 16px;
+            border: 2px solid #cbd5e1;
+            border-radius: 12px;
             font-size: 1rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            background: white;
         }
 
         .form-group input:focus {
             outline: none;
-            border-color: #0d9488;
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 4px rgba(4, 120, 87, 0.15);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
         }
     </style>
 </head>
@@ -165,65 +430,119 @@
 
     <!-- HERO SECTION -->
     <header>
-        <h1>Smart-харчування для всієї родини</h1>
-        <p>Здоровий раціон без складних дієт та багатогодинного стояння біля плити</p>
-        <a href="#register" class="cta-btn">Зареєструватися на курс</a>
+        <span class="badge">Авторський курс</span>
+        <h1>Smart-харчування<br>для всієї родини</h1>
+        <p>Навчимо готувати вишукано, швидко та корисно. Без нудних дієт та багатогодинного стояння біля плити.</p>
+        <a href="#register" class="cta-btn">Забронювати участь</a>
     </header>
 
     <div class="container">
-        <!-- FEATURES -->
-        <h2 class="section-title">Що ви отримаєте на курсі</h2>
-        <div class="features">
-            <div class="feature-card">
-                <h3>🥗 Збалансоване меню</h3>
-                <p>Готові раціони та прості рецепти, які смакують і дорослим, і дітям.</p>
+
+        <!-- ТАРІЛКА ЗДОРОВ'Я -->
+        <div class="plate-section">
+            <div class="plate-visual">
+                <div class="plate-part part-veggies">
+                    <span>🥦</span>
+                    <h4>50% Овочі</h4>
+                    <p>Зелень, клітковина</p>
+                </div>
+                <div class="plate-part part-protein">
+                    <span>🍗</span>
+                    <h4>25% Білки</h4>
+                    <p>Риба, м'ясо, яйця</p>
+                </div>
+                <div class="plate-part part-carbs">
+                    <span>🥑</span>
+                    <h4>25% Вуглеводи</h4>
+                    <p>Крупи, жири</p>
+                </div>
             </div>
-            <div class="feature-card">
-                <h3>⏱ Заощадження часу</h3>
-                <p>Лайфхаки швидкого приготування та системи заготовок на тиждень.</p>
-            </div>
-            <div class="feature-card">
-                <h3>💪 Енергія та здоров'я</h3>
-                <p>Забудьте про втому після їжі та покращіть самопочуття всієї родини.</p>
+
+            <div class="plate-info">
+                <h3>Формула Smart-Тарілки</h3>
+                <p>Базовий принцип нашого курсу — перетворити щоденний раціон на джерело краси та енергії за формулою гармонії:</p>
+                <ul class="plate-list">
+                    <li>Легкість у животі після кожного прийому їжі</li>
+                    <li>Відсутність тяги до постійних перекусів і солодкого</li>
+                    <li>Страви, які із задоволенням їдять і дорослі, і діти</li>
+                </ul>
             </div>
         </div>
 
-        <!-- PROGRAM -->
-        <h2 class="section-title">Програма курсу</h2>
-        
-        <div class="program-module">
-            <div class="module-header" onclick="toggleModule(this)">
-                <span>Модуль 1. Основи Smart-харчування</span>
-                <span>▼</span>
+        <!-- ГАЛЕРЕЯ СТРАВ -->
+        <h2 class="section-title">Приклади Smart-страв</h2>
+        <p class="section-subtitle">Корисно — це неймовірно апетитно та естетично</p>
+
+        <div class="dishes-grid">
+            <div class="dish-card">
+                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80" alt="Боул з лососем" class="dish-img">
+                <div class="dish-content">
+                    <span class="dish-tag">Енергетичний сніданок</span>
+                    <h3 class="dish-title">Smart-боул з авокадо та лососем</h3>
+                    <p class="dish-desc">Збалансоване поєднання здорових жирів, зелені та білка. Готується за 7 хвилин.</p>
+                </div>
             </div>
-            <div class="module-content">
-                <p>Як сформувати тарілку здоров'я, розібратися в білках, жирах та вуглеводах без нудних розрахунків.</p>
+
+            <div class="dish-card">
+                <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80" alt="Овочевий салат" class="dish-img">
+                <div class="dish-content">
+                    <span class="dish-tag">Легкий обід</span>
+                    <h3 class="dish-title">Теплий салат із кіноа та овочами</h3>
+                    <p class="dish-desc">Джерело довготривалої енергії без відчуття важкості. Ідеально для робочого дня.</p>
+                </div>
+            </div>
+
+            <div class="dish-card">
+                <img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=600&q=80" alt="Запечена риба" class="dish-img">
+                <div class="dish-content">
+                    <span class="dish-tag">Вишукана вечеря</span>
+                    <h3 class="dish-title">Запечений стейк із сезонними овочами</h3>
+                    <p class="dish-desc">Ніжний смак і максимум користі. Рецепт заготовки, що економить вечірній час.</p>
+                </div>
             </div>
         </div>
 
-        <div class="program-module">
-            <div class="module-header" onclick="toggleModule(this)">
-                <span>Модуль 2. Дитяче меню та примхи в їжі</span>
-                <span>▼</span>
+        <!-- ПРОГРАМА КУРСУ (РУХОМІ МОДУЛІ) -->
+        <h2 class="section-title">Програма навчального курсу</h2>
+        <p class="section-subtitle">Натисніть на модуль, щоб дізнатися деталі</p>
+
+        <div class="program-container">
+            <div class="program-module">
+                <div class="module-header" onclick="toggleModule(this)">
+                    <span>Модуль 1. Основи Smart-конструктора тарілки</span>
+                    <div class="icon-arrow">▼</div>
+                </div>
+                <div class="module-content">
+                    Навчитеся підбирати правильний баланс білків, жирів та вуглеводів без підрахунку калорій. Розберемо грамотне поєднання продуктів для максимальної енергії протягом дня.
+                </div>
             </div>
-            <div class="module-content">
-                <p>Як м'яко привчити дитину до овочів та корисних продуктів без примусу та сліз.</p>
+
+            <div class="program-module">
+                <div class="module-header" onclick="toggleModule(this)">
+                    <span>Модуль 2. Дитяче меню без сліз та примх</span>
+                    <div class="icon-arrow">▼</div>
+                </div>
+                <div class="module-content">
+                    Секрети маскування корисних овочів і зелені в улюблених дитячих стравах. Як м'яко перевести дитину від солодощів до збалансованого харчування.
+                </div>
+            </div>
+
+            <div class="program-module">
+                <div class="module-header" onclick="toggleModule(this)">
+                    <span>Модуль 3. Заготовки та розумний шопінг</span>
+                    <div class="icon-arrow">▼</div>
+                </div>
+                <div class="module-content">
+                    Організація холодильника, читання етикеток у магазинах та створення заготовок на 3-4 дні вперед. Економте до 5 годин на кухні щотижня!
+                </div>
             </div>
         </div>
 
-        <div class="program-module">
-            <div class="module-header" onclick="toggleModule(this)">
-                <span>Модуль 3. Організація закупів та заготовок</span>
-                <span>▼</span>
-            </div>
-            <div class="module-content">
-                <p>Секрети розумного шопінгу, читання етикеток та швидких заготовок на 3-4 дні наперед.</p>
-            </div>
-        </div>
-
-        <!-- REGISTRATION FORM -->
+        <!-- РЕЄСТРАЦІЯ -->
         <section class="cta-section" id="register">
-            <h2 class="section-title">Забронюйте місце на курсі</h2>
+            <h2 class="section-title" style="margin-bottom: 10px;">Забронювати місце</h2>
+            <p style="color: var(--text-muted); margin-bottom: 30px;">Заповніть форму, щоб розпочати навчання</p>
+
             <form id="registrationForm" onsubmit="handleSubmit(event)">
                 <div class="form-group">
                     <label for="name">Ваше ім'я</label>
@@ -237,18 +556,32 @@
                     <label for="phone">Номер телефону (Telegram)</label>
                     <input type="tel" id="phone" name="phone" placeholder="+380..." required>
                 </div>
-                <button type="submit" class="cta-btn" style="width: 100%; max-width: 400px; margin-top: 10px;">Зареєструватися</button>
+                <button type="submit" class="cta-btn" style="width: 100%; margin-top: 10px;">Зареєструватися зараз</button>
             </form>
         </section>
+
     </div>
 
+    <footer>
+        © 2026 Smart-харчування для всієї родини. Усі права захищено.
+    </footer>
+
     <script>
+        // АНІМАЦІЯ МОДУЛІВ
         function toggleModule(header) {
             const module = header.parentElement;
+            
+            // Закриваємо інші відкриті модулі для кращого ефекту
+            document.querySelectorAll('.program-module').forEach(item => {
+                if (item !== module) {
+                    item.classList.remove('active');
+                }
+            });
+
             module.classList.toggle('active');
         }
 
-        // ⚙️ НАЛАШТУВАННЯ TELEGRAM ТА FORMSPREE
+        // НАЛАШТУВАННЯ TELEGRAM ТА FORMSPREE
         const FORMSPREE_URL = "https://formspree.io/f/mqeryrgl";
         const TELEGRAM_BOT_TOKEN = "8874571887:AAGDwoutXwAfgXuRyFwu5wy6xzkffYZD5WA"; 
         const TELEGRAM_CHAT_ID = "1275971446";
@@ -258,7 +591,6 @@
             event.preventDefault();
             
             const btn = event.target.querySelector('button[type="submit"]');
-            const originalBtnText = btn.innerText;
             btn.innerText = 'Зачекайте...';
             btn.disabled = true;
 
@@ -266,7 +598,6 @@
             const email = document.getElementById('email').value;
             const phone = document.getElementById('phone').value;
 
-            // Екрануємо спеціальні символи
             const cleanName = name.replace(/[_*`\[\]]/g, '');
             const cleanEmail = email.replace(/[_*`\[\]]/g, '');
             const cleanPhone = phone.replace(/[_*`\[\]]/g, '');
@@ -295,13 +626,11 @@
                     body: JSON.stringify({ name, email, phone })
                 });
 
-                // Чекаємо виконання обох запитів
                 await Promise.allSettled([telegramPromise, emailPromise]);
 
             } catch (error) {
                 console.error('Помилка відправки:', error);
             } finally {
-                // Перенаправляємо користувача в бот
                 window.location.href = REDIRECT_TELEGRAM_URL;
             }
         }
